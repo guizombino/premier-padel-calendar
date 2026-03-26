@@ -1,35 +1,12 @@
-name: Update Premier Padel Calendar
+name: Update Calendar
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'
-  workflow_dispatch:
+  workflow_dispatch:   # só manual (para testar primeiro)
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run script
-        run: python generate_calendar.py
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "Auto-update calendar" || echo "No changes"
-          git push
+      - name: Test step
+        run: echo "Workflow está a funcionar!"
