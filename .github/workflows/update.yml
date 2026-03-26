@@ -1,33 +1,18 @@
-name: Update Calendar
+name: Test Python
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 * * * *'   # a cada 1 hora (mais seguro)
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install deps
-        run: pip install -r requirements.txt
-
-      - name: Run script
-        run: python generate_calendar.py
-
-      - name: Commit
-        run: |
-          git config --global user.name "bot"
-          git config --global user.email "bot@bot.com"
-          git add .
-          git commit -m "update" || echo "no changes"
-          git push
+      - name: Test Python
+        run: python --version
